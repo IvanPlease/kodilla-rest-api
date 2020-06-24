@@ -10,14 +10,27 @@ import java.util.Optional;
 
 @Service
 public class DbService {
+    private final TaskRepository repository;
+
     @Autowired
-    private TaskRepository repository;
+    public DbService(TaskRepository repository) {
+        this.repository = repository;
+    }
+
 
     public List<Task> getAllTasks(){
         return repository.findAll();
     }
 
-    public Task getTaskById(final Long taskId){
-        return repository.findById(taskId).orElse(null);
+    public Optional<Task> getTaskById(final Long taskId){
+        return repository.findById(taskId);
+    }
+
+    public Task saveTask(final Task task){
+        return repository.save(task);
+    }
+
+    public void removeTask(final Long taskId){
+        repository.deleteById(taskId);
     }
 }
