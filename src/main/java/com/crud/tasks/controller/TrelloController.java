@@ -20,12 +20,15 @@ public class TrelloController {
         this.trelloClient = trelloClient;
     }
 
+    private boolean checkCorrect(String checking){
+        return checking.contains("Kodilla");
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public void getTrelloBoards() {
 
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-
-        trelloBoards.forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
+        trelloBoards.stream().filter(trelloBoardDto -> checkCorrect(trelloBoardDto.getName())).forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
 
     }
 }
