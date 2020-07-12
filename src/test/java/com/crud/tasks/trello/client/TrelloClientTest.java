@@ -34,7 +34,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloAppUsername()).thenReturn("kodillauser");
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
-        URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&fields=name,id&lists=all");
+        URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&lists=all&fields=name,id");
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
         //When
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
