@@ -57,5 +57,6 @@ public class TrelloClientTest {
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
         //Then
         assertNotNull(fetchedTrelloBoards);
+        assertEquals(0, fetchedTrelloBoards.size());
     }
 }
