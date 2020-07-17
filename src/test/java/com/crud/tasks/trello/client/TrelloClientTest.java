@@ -2,6 +2,7 @@ package com.crud.tasks.trello.client;
 
 import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.TrelloBoardDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,13 +26,16 @@ public class TrelloClientTest {
     private RestTemplate restTemplate;
     @Mock
     private TrelloConfig trelloConfig;
-    @Test
-    public void shouldFetchTrelloBoards() throws URISyntaxException {
-        //Given
+    @Before
+    public void before(){
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
         when(trelloConfig.getTrelloAppUsername()).thenReturn("kodillauser");
+    }
+    @Test
+    public void shouldFetchTrelloBoards() throws URISyntaxException {
+        //Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
         URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&lists=all&fields=name,id");
@@ -44,5 +48,11 @@ public class TrelloClientTest {
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
     }
-
+    @Test
+    public void shouldReturnEmptyList() throws URISyntaxException {
+        URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&lists=all&fields=name,id");
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+        assertNotNull(fetchedTrelloBoards);
+    }
 }
