@@ -1,10 +1,10 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.service.TrelloService;
-import com.crud.tasks.trello.client.TrelloClient;
+import com.crud.tasks.trello.facade.TrelloFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,20 +18,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/trello")
 public class TrelloController {
 
-    private final TrelloService trelloService;
+    private final TrelloFacade trelloFacade;
 
     @Autowired
-    public TrelloController(TrelloService trelloService) {
-        this.trelloService = trelloService;
+    public TrelloController(TrelloFacade trelloFacade) {
+        this.trelloFacade = trelloFacade;
     }
 
     @GetMapping(value = "/getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
-        return trelloService.fetchTrelloBoards();
+        return trelloFacade.fetchTrelloBoards();
     }
 
     @PostMapping(value = "/createTrelloCard", consumes = APPLICATION_JSON_VALUE)
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
-        return trelloService.createdTrelloCard(trelloCardDto);
+    public CreatedTrelloCardDto createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
+        return trelloFacade.createCard(trelloCardDto);
     }
 }

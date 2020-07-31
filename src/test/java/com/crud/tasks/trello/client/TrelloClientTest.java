@@ -1,7 +1,9 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.config.TrelloConfig;
+import com.crud.tasks.domain.TrelloBoard;
 import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.mapper.TrelloMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,8 @@ public class TrelloClientTest {
     private RestTemplate restTemplate;
     @Mock
     private TrelloConfig trelloConfig;
+    @Mock
+    private TrelloMapper trelloMapper;
     @Before
     public void before(){
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
@@ -54,7 +58,7 @@ public class TrelloClientTest {
         URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&lists=all&fields=name,id");
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
         //When
-        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+        List<TrelloBoard> fetchedTrelloBoards = trelloMapper.mapToBoards(trelloClient.getTrelloBoards());
         //Then
         assertNotNull(fetchedTrelloBoards);
         assertEquals(0, fetchedTrelloBoards.size());
