@@ -4,12 +4,14 @@ import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
+import com.crud.tasks.task.facade.TaskFacade;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,15 +31,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TaskControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    @Mock
-    private DbService dbService;
+    @MockBean
+    private TaskFacade taskFacade;
     @Test
     public void shouldFetchAllTasks() throws Exception{
         //Given
-        List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task(1L,"Test Title", "Task test"));
-        taskList.add(new Task(2L,"Test Title", "Task test"));
-        when(dbService.getAllTasks()).thenReturn(taskList);
+        List<TaskDto> taskList = new ArrayList<>();
+        taskList.add(new TaskDto(1L,"Test Title", "Task test"));
+        taskList.add(new TaskDto(2L,"Test Title", "Task test"));
+        when(taskFacade.fetchAllTasks()).thenReturn(taskList);
         //When & Then
         mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
