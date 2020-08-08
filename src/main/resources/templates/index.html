@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome page</title>
+    <style>
+        span{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!--/*@thymesVar id="operation1" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <!--/*@thymesVar id="operation2" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <!--/*@thymesVar id="operation3" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <!--/*@thymesVar id="outcome1" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <!--/*@thymesVar id="outcome2" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <!--/*@thymesVar id="outcome3" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <h1>First impression of my page</h1>
+    <span th:text="${variable}"></span>
+    <span th:text="${operation1}+' = '+${outcome1}"></span>
+    <span th:text="${operation2}+' = '+${outcome2}"></span>
+    <span th:text="${operation3}+' = '+${outcome3}"></span>
+</body>
+</html>
