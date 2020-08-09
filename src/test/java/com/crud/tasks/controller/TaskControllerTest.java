@@ -66,19 +66,19 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.content", is("TaskDto")));
     }
 
-//    @Test
-//    public void shouldUpdateTask() throws Exception{
-//        //Given
-//        TaskDto mainTaskDto = new TaskDto(1L, "TaskDto", "TaskDto");
-//        TaskDto mainTaskDto1 = new TaskDto(1L, "TaskDto", "TaskDto2");
-//        when(taskFacade.updateTask(mainTaskDto)).thenReturn(mainTaskDto1);
-//        //When & Then
-//        assertEquals("TaskDto", mainTaskDto.getContent());
-//        mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).content(asJsonString(mainTaskDto)))
-//                .andExpect(status().is(200))
-//                .andExpect(MockMvcResultMatchers.content().string(asJsonString(mainTaskDto1)))
-//                .andDo(MockMvcResultHandlers.print());
-//    }
+    @Test
+    public void shouldUpdateTask() throws Exception{
+        //Given
+        TaskDto mainTaskDto = new TaskDto(1L, "TaskDto", "TaskDto");
+        TaskDto mainTaskDto1 = new TaskDto(1L, "TaskDto", "TaskDto2");
+        when(taskFacade.updateTask(mainTaskDto)).thenReturn(mainTaskDto1);
+        //When & Then
+        assertEquals("TaskDto", mainTaskDto.getContent());
+        mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).content(asJsonString(mainTaskDto)))
+                .andExpect(status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(asJsonString(mainTaskDto1)))
+                .andDo(MockMvcResultHandlers.print());
+    }
 
     @Test
     public void shouldCreateTask() throws Exception{
