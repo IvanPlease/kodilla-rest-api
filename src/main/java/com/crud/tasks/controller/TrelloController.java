@@ -24,12 +24,12 @@ public class TrelloController {
         this.trelloFacade = trelloFacade;
     }
 
-    @GetMapping(value = "/getTrelloBoards")
+    @GetMapping(value = "/boards")
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloFacade.fetchTrelloBoards();
     }
 
-    @PostMapping(value = "/createTrelloCard", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/cards", consumes = APPLICATION_JSON_VALUE)
     public CreatedTrelloCardDto createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
         return trelloFacade.createCard(trelloCardDto);
     }
