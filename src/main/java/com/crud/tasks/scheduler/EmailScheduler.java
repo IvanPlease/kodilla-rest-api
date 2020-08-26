@@ -31,7 +31,16 @@ public class EmailScheduler {
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                content), false);
+                content), 0);
+    }
+
+    @Scheduled(cron = "0 0 10 * * *")
+    public void sendInformationEmailDaily() {
+        long size = taskRepository.count();
+        simpleEmailService.send(new Mail(
+                adminConfig.getAdminMail(),
+                SUBJECT,
+                ""), 2);
     }
 
 }

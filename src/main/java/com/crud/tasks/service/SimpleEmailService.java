@@ -24,11 +24,14 @@ public class SimpleEmailService {
         this.mailCreatorService = mailCreatorService;
     }
 
-    public void send(final Mail mail, final boolean type){
+    public void send(final Mail mail, final int type){
         log.info("Starting email preparation...");
         try{
-            if(type){
+            if(type == 1){
                 MimeMessagePreparator mimeMessage = createMimeMessage(mail);
+                javaMailSender.send(mimeMessage);
+            }else if(type == 2) {
+                MimeMessagePreparator mimeMessage = createMimeMessageDaily(mail);
                 javaMailSender.send(mimeMessage);
             }else{
                 SimpleMailMessage simpleMailMessage = createMailMessage(mail);
@@ -46,6 +49,15 @@ public class SimpleEmailService {
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
+
+    private MimeMessagePreparator createMimeMessageDaily(final Mail mail){
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildDailyReportMail(), true);
         };
     }
 
