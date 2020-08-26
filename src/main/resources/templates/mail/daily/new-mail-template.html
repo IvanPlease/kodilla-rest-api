@@ -41,7 +41,7 @@
             </p>
             <table>
                 <tr>
-                    <td>
+                    <td style="display: flex;flex-direction: column;">
                         <ul id="task-list" style="clear: both;list-style-type: none;" th:if="${taskExists}" th:each="function:${fetchedTasks}">
                             <li><sup th:text="'['+${function.getId()}+'] '"></sup><span th:text="${function.getTitle()}"></span>
                                 <ul style="list-style-type:none;">
