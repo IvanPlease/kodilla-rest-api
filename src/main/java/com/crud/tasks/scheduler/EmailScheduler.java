@@ -36,7 +36,6 @@ public class EmailScheduler {
 
     @Scheduled(cron = "0 */5 * * * *")
     public void sendInformationEmailDaily() {
-        long size = taskRepository.count();
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
