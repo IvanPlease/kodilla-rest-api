@@ -39,16 +39,20 @@
             <p style="clear: both;text-align: center;padding-bottom: 15px;" th:if="${taskExists}">
                 <span style="float: left;">Lista zadań:</span>
             </p>
-            <table>
+            <table style="width:100%">
                 <tr>
-                    <td style="display: flex;flex-direction: column;">
-                        <ul id="task-list" style="clear: both;list-style-type: none;" th:if="${taskExists}" th:each="function:${fetchedTasks}">
-                            <li><sup th:text="'['+${function.getId()}+'] '"></sup><span th:text="${function.getTitle()}"></span>
-                                <ul style="list-style-type:none;">
-                                    <li th:text="${function.getContent()}"></li>
+                    <td>
+                        <table>
+                            <tr>
+                                <ul id="task-list" style="clear: both;list-style-type: none;" th:if="${taskExists}" th:each="function:${fetchedTasks}">
+                                    <li><sup th:text="'['+${function.getId()}+'] '"></sup><span th:text="${function.getTitle()}"></span>
+                                        <ul style="list-style-type:none;">
+                                            <li th:text="${function.getContent()}"></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </tr>
+                        </table>
                     </td>
                     <td>
                         <img alt="scrum_board" style="width: 50%;margin-left: 50%;" src="https://raw.githubusercontent.com/IvanPlease/kodilla-rest-api/master/src/main/resources/templates/mail/daily/scrum_board_unDraw.png"/>
