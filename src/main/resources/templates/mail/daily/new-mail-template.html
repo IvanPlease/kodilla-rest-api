@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <title>Mail</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
         body, html{
             background-color: #dedede;
         }
@@ -39,7 +40,7 @@
             <span style="float: left;">Lista zadań:</span>
         </p>
         <ul id="task-list" style="clear: both;list-style-type: none;" th:if="${taskExists}" th:each="function:${fetchedTasks}">
-            <li><sup th:text="${function.getId()}"></sup><span th:text="${function.getTitle()}"></span>
+            <li><sup th:text="'['+${function.getId()}+'] '"></sup><span th:text="${function.getTitle()}"></span>
                 <ul style="list-style-type:none;">
                     <li th:text="${function.getContent()}"></li>
                 </ul>
