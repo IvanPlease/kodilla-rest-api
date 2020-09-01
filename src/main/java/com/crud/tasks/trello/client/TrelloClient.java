@@ -60,4 +60,10 @@ public class TrelloClient {
         uriParams.put("idList", trelloCardDto.getListId());
         return restTemplate.postForObject(createUri(uriParams, "/cards"), null, CreatedTrelloCardDto.class);
     }
+
+    public void deleteCard(Long cardId) {
+        Map<String, String> uriParams = new HashMap<>();
+        uriParams.put("id", String.valueOf(cardId));
+        restTemplate.delete(createUri(uriParams, "/cards"));
+    }
 }

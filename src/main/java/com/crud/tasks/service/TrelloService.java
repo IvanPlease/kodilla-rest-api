@@ -32,4 +32,8 @@ public class TrelloService {
                 "New card: " + trelloCard.getName() + " has been created on your Trello account"), 0));
         return newCard;
     }
+
+    public void deleteTrelloCard(Long cardId) {
+        trelloClient.deleteCard(cardId);
+    }
 }

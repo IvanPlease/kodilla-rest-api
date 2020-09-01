@@ -34,5 +34,9 @@ public class TrelloFacade {
         return trelloService.createdTrelloCard(trelloMapper.mapToCardDto(trelloCard));
     }
 
+    public void deleteCard(final Long cardId){
+        trelloService.deleteTrelloCard(cardId);
+    }
+
 
 }

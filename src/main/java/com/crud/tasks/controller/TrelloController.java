@@ -33,4 +33,8 @@ public class TrelloController {
     public CreatedTrelloCardDto createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
         return trelloFacade.createCard(trelloCardDto);
     }
+    @DeleteMapping(value = "/cards/{cardId}")
+    public void createdTrelloCard(@PathVariable Long cardId){
+        trelloFacade.deleteCard(cardId);
+    }
 }
